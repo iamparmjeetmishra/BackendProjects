@@ -76,3 +76,36 @@ connectDB()
 }
 
 ```
+
+### Custom APi Response and Error Handling with Middleware function
+
+#### We are going to use async function like DB Connection again and again. As a result we can make this global Higher Order function
+
+###### Higher Order function with Try and Catch
+
+```
+<!-- const asyncHandler = (fn) => {() => {}} -->
+const asyncHandler = (fn) => async(req, res, next) => {
+    try {
+        await fn(req, res, next)
+    } catch (error) {
+        res.status(err.code || 500).json({
+            success: false,
+            message: err.message
+        })
+    }
+}
+
+```
+###### Higher Order function with Promise
+
+```
+const asyncHandler = (requestHandler) => {
+    (req, res, next) => {
+        Promise.resolve(requestHandler(req, res, next)).catch((err) => {
+            next(err)
+        })
+    }
+}
+
+```
