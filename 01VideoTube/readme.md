@@ -109,3 +109,7 @@ const asyncHandler = (requestHandler) => {
 }
 
 ```
+
+### Uploading the file to the server or cloudinary or aws
+##### There is two ways - First way to directly upload the file to the storage bucket. and the other preferred way and professional way is to use two step strategy - In which first we upload the file to the our server using multer and middleware and then upload it the bucket.
+##### Why -> Because if the upload error or server error. Atleast we stored in our server that way we can re run the script. and Other way is the instant retrieval to the user.
